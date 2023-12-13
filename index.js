@@ -6,8 +6,10 @@ const log = document.getElementById("log");
 const template = document.getElementById("template");
 const container = document.getElementById("container");
 const swiper = document.querySelector(".swiper");
+const modal = document.getElementById("modalBlog");
 
 const URL_API = "https://mocki.io/v1/d2ee1732-4fd1-429a-a971-3742f1422b8a";
+
 
 if (swiper) {
   new Swiper(swiper, {
@@ -36,11 +38,21 @@ const videoGames = async () => {
   const games = await fetch(URL_API).then((response) => response.json());
   let gamesCom = [];
   if (template) {
-    games.forEach(({ title, author, lorem }) => {
+    const close = modal.querySelector(".close");
+    close.addEventListener("click", ()=>{
+      modal.remove();
+    })
+    modal.remove();
+    games.forEach(({ title, author, lorem }, index) => {
       const article = template.content.firstElementChild.cloneNode(true);
-      let url = title.normalize("NFC").replace(/\:/g, "" ).replace(/\s/g, "-" ).toLowerCase();
+      let url = title
+        .normalize("NFC")
+        .replace(/\:/g, "")
+        .replace(/\s/g, "-")
+        .toLowerCase();
       const img = article.querySelector(".posterG");
-      img.src = `/finalCoder/IMG/${url}.jpg`;
+      const src = `/finalCoder/IMG/${url}.jpg`;
+      img.src = src;
 
       const titleG = article.querySelector(".titleG");
       titleG.innerText = title;
@@ -50,6 +62,22 @@ const videoGames = async () => {
 
       const descriptionsG = article.querySelector(".descriptionsG");
       descriptionsG.innerText = lorem;
+
+      const btn = article.querySelector(".btn");
+      btn.addEventListener("click", () => {
+        modal.classList.remove("opacity-0");
+        const titleG = modal.querySelector(".titleG");
+        titleG.innerText = title;
+
+        const img = modal.querySelector(".posterG");
+        img.src = src;
+
+        const descriptionsG = modal.querySelector(".descriptionsG");
+        descriptionsG.innerText = lorem;
+
+        document.body.append(modal);
+        console.log(index);
+      });
 
       container.append(article);
     });
