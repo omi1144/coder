@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coder CRM</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.3/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div id="message" class=" flex justify-end py-6 px-20 gap-4 items-center">
+        <span>Felicidades <b>miguel</b> estas logiado</span>
+        <button type="button" class="btn btn-secondary" id="log">Logout</button>
+    </div>
+
+    <div class="container grid grid-cols-4 w-full gap-8 mx-auto mt-10" id="container">
+        <template id="template">
+            <div class="flex flex-col">
+                <article class="mb-2"><img class="posterG w-full aspect-[5/3] object-cover" src="" alt=""></article>
+                <h2 class="titleG text-[20px] font-bold text-white">title</h2>
+                <h3 class="authorG text-[14px] opacity-75 mb-4">author</h3>
+                <p class="descriptionsG text-[16px]"><span></span></p>
+            </div>
+        </template>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
